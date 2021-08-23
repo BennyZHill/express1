@@ -11,10 +11,19 @@ app.get("/", (req, res) => {
 app.get("/about", (req, res) => {
   res.status(200).send("This is the about route");
 });
+
 app.get("/users/:username", (req, res) => {
   res
     .status(200)
     .send(`You requested information about ${req.params.username}`);
+});
+
+app.get("/:username/:project", (req, res) => {
+  res
+    .status(200)
+    .send(
+      `You requested information about ${req.params.project} created by ${req.params.username}`
+    );
 });
 
 app.listen(port, () => {
