@@ -11,12 +11,10 @@ app.get("/", (req, res) => {
 });
 
 app.post("/:username/", (req, res) => {
-  res
-    .status(201)
-    .json({
-      message: `You created the repo ${req.body.project}`,
-      data: req.body,
-    });
+  res.status(201).json({
+    message: `You created the repo ${req.body.project}`,
+    data: req.body,
+  });
 });
 
 app.get("/:username/:project", (req, res) => {
@@ -26,12 +24,10 @@ app.get("/:username/:project", (req, res) => {
 });
 
 app.post("/:username/:project", (req, res) => {
-  res
-    .status(200)
-    .json({
-      message: `You updated the project: ${req.params.project}`,
-      date: req.body,
-    });
+  res.status(200).json({
+    message: `You updated the project: ${req.params.project}`,
+    date: req.body,
+  });
 });
 
 app.listen(port, () => {
