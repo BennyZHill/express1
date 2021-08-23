@@ -27,5 +27,5 @@ app.get("/:username/:project", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log("App is online");
+  console.log("App is online, happy days");
 });
