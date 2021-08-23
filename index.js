@@ -12,7 +12,6 @@ app.get("/about", (req, res) => {
   res.status(200).send("This is the about route");
 });
 
-// http://localhost/users/nmunro?age=3456
 app.get("/users/:username", (req, res) => {
   console.log(req.query);
   res
