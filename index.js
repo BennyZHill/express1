@@ -11,6 +11,11 @@ app.get("/", (req, res) => {
 app.get("/about", (req, res) => {
   res.status(200).send("This is the about route");
 });
+app.get("/users/:username", (req, res) => {
+  res
+    .status(200)
+    .send(`You requested information about ${req.params.username}`);
+});
 
 app.listen(port, () => {
   console.log("App is online");
