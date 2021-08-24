@@ -8,6 +8,7 @@ const User = connection.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+
     passwordHash: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -15,6 +16,7 @@ const User = connection.define(
   },
   {}
 );
+
 const main = async () => {
   try {
     await User.sync({ alter: true });
@@ -22,6 +24,7 @@ const main = async () => {
     console.log(error);
   }
 };
+
 main();
 
 module.exports = User;

@@ -1,4 +1,5 @@
-const User = require("../models/users");
+const User = require("../models/user");
+
 const addUser = async (name, passwordHash) => {
   try {
     const newUser = await User.build({ name, passwordHash });
@@ -13,8 +14,10 @@ const listUsers = async () => {
     return await User.findAll({});
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
+
 module.exports = {
   addUser,
   listUsers,
