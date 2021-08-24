@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const saltRounds = 10;
 require("dotenv").config();
 
 const app = express();
@@ -11,11 +12,30 @@ app.get("/", (req, res) => {
   res.status(200).send("Hello world");
 });
 
+app.post("/register", async (req, res) => {
+  const salt = await bcrypt.genSalt(saltRounds);
+  const hash = await bcrypt.hash(req.body.password, salt);
+
+  if (await bcrypt.compare(req.body.checkPassword, hash)) {
+    res
+      .status(201)
+      .json({ message: `Password ${req.body.checkPassword} matches ${hash}` });
+  } else {
+    res
+      .status(401)
+      .json({
+        message: `Password ${req.body.checkPassword} does not match ${hash}`,
+      });
+  }
+});
+
 app.post("/:username/", (req, res) => {
-  res.status(201).json({
-    message: `You created the repo ${req.body.project}`,
-    data: req.body,
-  });
+  res
+    .status(201)
+    .json({
+      message: `You created the repo ${req.body.project}`,
+      data: req.body,
+    });
 });
 
 app.get("/:username/:project", (req, res) => {
@@ -25,10 +45,12 @@ app.get("/:username/:project", (req, res) => {
 });
 
 app.post("/:username/:project", (req, res) => {
-  res.status(200).json({
-    message: `You updated the project: ${req.params.project}`,
-    date: req.body,
-  });
+  res
+    .status(200)
+    .json({
+      message: `You updated the project: ${req.params.project}`,
+      date: req.body,
+    });
 });
 
 app.listen(port, () => {
