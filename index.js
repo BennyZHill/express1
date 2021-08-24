@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 require("dotenv").config();
 
 const app = express();
